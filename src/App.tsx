@@ -1,26 +1,20 @@
-import "./App.css";
-import { css } from "@emotion/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { FOOTER_HEIGHT, Footer } from "./components/Footer";
+import Router from "./utils/routes";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p
-          css={{
-            background: "blue ",
-          }}
+    <div css={{ height: "100%" }}>
+      <QueryClientProvider client={queryClient}>
+        <div
+          css={{ height: `calc(100% - ${FOOTER_HEIGHT}px)`, overflow: "auto" }}
         >
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+          <Router />
+        </div>
+      </QueryClientProvider>
+      <Footer />
     </div>
   );
 }
